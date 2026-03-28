@@ -17,6 +17,7 @@
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
                             <a style="font-weight:bold" class="nav-link text-dark" href="/controllers/cliniqueController.php">Cliniques</a>
+                            <a style="font-weight:bold" class="nav-link text-dark" href="/controllers/patientController.php">Patient</a>
                         </li>
                     </ul>
                 </div>
