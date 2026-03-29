@@ -1,4 +1,28 @@
-<h3>Liste des patient(s) (<?php echo count($listePatient); ?> patient(s) pour la Clinique) :</h3>
+<form method="GET" action="patientController.php">
+    <input type="hidden" name="action" value="afficherListePatientsParClinique">
+
+    <label for="nomClinique">Choisir une clinique :</label>
+    <select name="nomClinique" id="nomClinique" onchange="this.form.submit()">
+        <option value="">-- Sélectionne une Clinique --</option>
+
+        <?php
+        foreach($listeClinique as $clinique){
+            $selected = (isset($nomClinique) && $clinique->getNom() == $nomClinique) ? "selected"  : "";
+            echo "<option value = '" . $clinique->getNom() . "' $selected>" . $clinique->getNom() . "</option>";
+        }
+        ?>
+    </select>
+</form>
+<br />
+<br />
+<h3>Liste des patient(s) :
+    <?php 
+        if ($nomClinique != "") {
+            echo "(" . count($listePatient) . " patient(s) pour la clinique : <strong>" . $nomClinique . "</strong>)";
+        }
+    ?>
+</h3>
+<br />
 <br />
 <table>
         <tr>

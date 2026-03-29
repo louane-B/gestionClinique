@@ -43,6 +43,35 @@
 
                 return $listePatient;
             }
+
+            public function obtenirPatientsParClinique(int $idClinique)
+            {
+                try
+                {
+                    $pdo = new PDO($this->stringConnexion, $this->usager, $this->password);
+                    $stmt = $pdo->prepare("SELECT * FROM patients WHERE idClinique = ? ORDER BY nom;");
+                    $stmt->execute([$idClinique]);
+
+                    $listePatientParClinique = [];
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+                    {
+                        $listePatientParClinique[] = new PatientDTO(
+                            $row["noDossier"],
+                            $row["noAssuranceMaladie"],
+                            $row["nom"],
+                            $row["prenom"],
+                            $row["adresse"],
+                            $row["ville"],
+                            $row["province"],
+                            $row["codePostal"],
+                            $row["telephone"],
+                            $row["courriel"]
+                        );
+                    }
+                    return $listePatientParClinique;
+                } 
+                catch (PDOException $e){}
+            }
         }
 
 
