@@ -47,6 +47,20 @@
             //Importation de la vue...
             require_once(__DIR__ . "/../views/afficherListePatient.php");
             break;
+
+        case "ajouterPatient":
+            try
+            {
+                //Appel de l'ajout au Repository..
+                PatientRepository::getInstance()->ajouterPatient(new PatientDTO($_POST["noDossier"], $_POST["noAssuranceMaladie"], $_POST["nom"], $_POST["prenom"], $_POST["adresse"], $_POST["ville"], $_POST["province"], $_POST["codePostal"], $_POST["telephone"], $_POST["courriel"], $_POST["idClinique"]));
+                $_SESSION['success'] = "Patient ajouter avec succès";
+            } catch (Exception $e) {
+                $_SESSION['erreur'] = "Erreur lors de l'ajout du patient";
+            }
+
+            //Redirecion vers la page patientController pour l'affichage...
+            header("Location: patientController.php");
+            break;
     }
 ?>
 <?php

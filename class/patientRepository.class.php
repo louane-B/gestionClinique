@@ -72,6 +72,21 @@
                 } 
                 catch (PDOException $e){}
             }
+
+            public function ajouterPatient($patientDTO)
+            {
+                try
+                {
+                    $pdo = new PDO($this->stringConnexion, $this->usager, $this->password);
+                    $ins = $pdo->prepare("INSERT INTO patients (noDossier, noAssuranceMaladie, nom, prenom, adresse, ville, province, codePostal, telephone, courriel, idClinique)" .
+                                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    $ins->execute(array($patientDTO->getnoDossier(), $patientDTO->getnoAssuranceMaladie(), $patientDTO->getnom(), $patientDTO->getPrenom(), $patientDTO->getadresse(), $patientDTO->getville(), $patientDTO->getProvince(), $patientDTO->getCodePostal(), $patientDTO->getTelephone(), $patientDTO->getCourriel(), $patientDTO->getIdClinique() ));
+                }
+                catch (PDOException $e){
+                    echo "Erreur SQL : " . $e->getMessage();
+                    throw $e;
+                }
+            }
         }
 
 
