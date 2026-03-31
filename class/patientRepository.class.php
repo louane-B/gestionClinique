@@ -73,6 +73,7 @@
                 catch (PDOException $e){}
             }
 
+            //Methode permettant d'ajouter un nouveau patient dans une clinique...
             public function ajouterPatient($patientDTO)
             {
                 try
@@ -87,6 +88,19 @@
                     throw $e;
                 }
             }
+
+            //Méthode permettant de supprimer une clinique par son nom...
+		    public function supprimerPatient($nomPatien, $prenomPatient)
+		    {
+			    try
+			    {
+				    $pdo = new PDO($this->stringConnexion,$this->usager,$this->password);
+				    $ins = $pdo->prepare("DELETE FROM patients " . 
+				                                "WHERE nom=? AND prenom=?");
+				    $ins->execute(array($nomPatien, $prenomPatient));
+			    }	
+			    catch(Exception $e){}
+		    }
         }
 
 
