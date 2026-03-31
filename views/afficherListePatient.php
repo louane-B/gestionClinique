@@ -68,6 +68,7 @@
             ?>
             <input type="hidden" id="nomPatient" name="nomPatient">
             <input type="hidden" id="prenomPatient" name="prenomPatient">
+            <input type="hidden" name="nomClinique" value="<?= $nomClinique ?>">
         </form>
 </table>
 <?php
