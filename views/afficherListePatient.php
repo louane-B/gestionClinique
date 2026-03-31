@@ -26,16 +26,16 @@
 <br />
 <table>
         <tr>
-            <th>N° de Dossier</th>
-            <th>N° d'Assurance maladie</th>
-            <th>Nom</th>
-            <th>Prenom</th>
-            <th>Adresse</th>
-            <th>Ville</th>
-            <th>Province</th>
-            <th>Code Postal</th>
-            <th>Téléphone</th>
-            <th>Courriel</th>
+            <th>N° de Dossier </th>
+            <th>N° d'Assurance Maladie </th>
+            <th>Nom </th>
+            <th>Prenom </th>
+            <th>Adresse </th>
+            <th>Ville </th>
+            <th>Province </th>
+            <th>Code Postal </th>
+            <th>Téléphone </th>
+            <th>Courriel </th>
         </tr>
         <!-- formulaire pour afficher la liste des patients... -->
         <form method="">
@@ -75,3 +75,93 @@ if (isset($_SESSION['error'])) {
 <br>
 <!-- formulaire pour ajouter un nouveau patient... -->
 <form method="POST" action="patientController.php?action=ajouterPatient&nomClinique=<?= urlencode($nomClinique) ?>">
+    <table>
+        <tr>
+            <td>
+                <label>N° de Dossier</label>
+            </td>
+            <td>
+                <input name="noDossier" required/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>N° d'Assurance Maladie</label>
+            </td>
+            <td>
+                <input name="noAssuranceMaladie" required/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Nom</label>
+            </td>
+            <td>
+                <input name="nom" required/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Prenom</label>
+            </td>
+            <td>
+                <input name="prenom" required/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Adresse</label>
+            </td>
+            <td>
+                <input name="adresse" required/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Ville</label>
+            </td>
+            <td>
+                <input name="ville" required/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Province</label>
+            </td>
+            <td>
+                <input name="province" required/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Code Postal</label>
+            </td>
+            <td>
+                <input name="codePostal" required/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Telephone</label>
+            </td>
+            <td>
+                <input name="telephone" required/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Courriel</label>
+            </td>
+            <td>
+                <input name="courriel" required/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input type="submit" value="Ajouter" style="width:100px"/>
+            </td>
+        </tr>
+    </table>
+</form>
