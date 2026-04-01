@@ -131,11 +131,11 @@
 				    $ins->setFetchMode(PDO::FETCH_ASSOC);
 				    $ins->execute(array($noDossier));
 				    $resultat = $ins->fetch();
-				    $clinique = new PatientTO($resultat["noDossier"], $resultat["noAssuranceMaladie"], $resultat["nom"], $resultat["prenom"], $resultat["adresse"], $resultat["ville"], $resultat["province"], $resultat["codePostal"], $resultat["telephone"], $resultat["courriel"], $resultat["idClinique"]);
+				    $patient = new PatientDTO($resultat["noDossier"], $resultat["noAssuranceMaladie"], $resultat["nom"], $resultat["prenom"], $resultat["adresse"], $resultat["ville"], $resultat["province"], $resultat["codePostal"], $resultat["telephone"], $resultat["courriel"], $resultat["idClinique"]);
 			    }	
 			    catch(Exception $e){}
 
-			    return $clinique;
+			    return $patient;
 			
 		    }
         }
