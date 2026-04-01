@@ -23,7 +23,7 @@
                     echo "<td>" . $clinique->getCodePostal() . "</td>";
                     echo "<td>" . $clinique->getTelephone() . "</td>";
                     echo "<td>" . $clinique->getCourriel() . "</td>";
-                    echo '<td><input value="Modifier" onclick="document.getElementById(\'nomClinique\').value =\'' . $clinique->getNom() . '\'; this.form.action=\'cliniqueController.php\'; this.form.method=\'GET\'; submit();" type="button"</td>';
+                    echo '<td><input value="Modifier" onclick="document.getElementById(\'nomClinique\').value =\'' . $clinique->getNom() . '\'; this.form.action=\'cliniqueController.php\'; this.form.method=\'GET\'; submit();" type="button"></td>';
                     echo '<td><input value="Supprimer" type="button" onclick="if (confirm(\'Voulez-vous vraiment supprimer la clinique : '  . $clinique->getNom() . '\')) { document.getElementById(\'nomClinique\'). value =\'' . $clinique->getNom() . '\'; this.form.action =\'cliniqueController.php?action=supprimerClinique\'; this.form.method =\'POST\'; submit();}"></td>';
                     echo "</tr>";
                 }

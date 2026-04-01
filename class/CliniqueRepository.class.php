@@ -123,5 +123,19 @@
 				    return $idPatient;
 		    }
 
+            public function obtenirNomClinique($idClinique)
+            {
+                try {
+                    $pdo = new PDO($this->stringConnexion, $this->usager, $this->password);
+                    $stmt = $pdo->prepare("SELECT nom FROM cliniques WHERE idClinique = ?");
+                    $stmt->execute([$idClinique]);
+                    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                    return $row ? $row["nom"] : null;
+                } catch (Exception $e) {
+                    return null;
+                }
+            }
+
+
         }
 ?>

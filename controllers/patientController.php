@@ -83,6 +83,25 @@
                 //Redirection vers la page patientController pour l'affichage de la liste des patients de la clinique sélectionner...
                 header("Location: patientController.php?action=afficherListePatientsParClinique&nomClinique=" . urlencode($nomClinique));
                 break;
+
+            //Ouvrire le formulaire de modification d'un dossier de patient...
+            case "formulaireModifierPatient":
+                //Preparation du dossier patient pour la vue...
+                $patient = PatientRepository::getInstance()->obtenirPatient($_GET["noDossier"]);
+                $nomClinique = $_GET["nomClinique"];
+                //Importation de la vue...
+                require_once(__DIR__ . "/../views/formulaireModifierPatient.php");
+                break; 
+
+            //Modifier le Patient...
+            case "modifierPatient":
+                $nomClinique = $_POST["nomClinique"];
+                $idClinique = $_POST["idClinique"];
+                //Appel de la modification...
+                PatientRepository::getInstance()->modifierPatient(new PatientDTO($_POST["noDossier"], $_POST["noAssuranceMaladie"], $_POST["nom"], $_POST["prenom"], $_POST["adresse"], $_POST["ville"], $_POST["province"], $_POST["codePostal"], $_POST["telephone"], $_POST["courriel"], $idClinique));
+                //Redirecion vers la page patientController pour l'affichage de la liste des patients de la clinique sélectionner...
+                header("Location: patientController.php?action=afficherListePatientsParClinique&nomClinique=" . urlencode($nomClinique));
+                break;
     }
 ?>
 <?php

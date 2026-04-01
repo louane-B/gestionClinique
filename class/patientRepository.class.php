@@ -101,6 +101,43 @@
 			    }	
 			    catch(Exception $e){}
 		    }
+
+            //Méthode permettant de modifier le Dossier d'un patient avec un dto de type patients...
+		    public function modifierPatient($patientDTO)
+		    {
+			    try
+			    {
+				    $pdo = new PDO($this->stringConnexion,$this->usager,$this->password);
+				    $ins = $pdo->prepare("UPDATE patients " . 
+				                            "SET noAssuranceMaladie=?,nom=?,prenom=?,adresse=?,ville=?,province=?,codePostal=?,telephone=?,courriel=?,idClinique=? " . 
+									        "WHERE noDossier=?");
+				    $ins->execute(array($patientDTO->getnoAssuranceMaladie(),$patientDTO->getNom(),$patientDTO->getPrenom(),$patientDTO->getAdresse(),$patientDTO->getVille(),$patientDTO->getprovince(), $patientDTO->getCodePostal(), $patientDTO->getTelephone(), $patientDTO->getCourriel(), $patientDTO->getIdClinique(), $patientDTO->getNoDossier()));
+			    }	
+			    catch(Exception $e){
+                    echo "Erreur SQL : " . $e->getMessage();
+                }
+		    }
+
+            //Méthode permettant d'obtenir une clinique par son nom...
+		    public function obtenirPatient($noDossier)
+		    {
+			    $patient = null;
+			    try
+			    {
+				    $pdo = new PDO($this->stringConnexion,$this->usager,$this->password);
+				    $ins = $pdo->prepare("SELECT * " . 
+				                            "FROM patients " . 
+									        "WHERE noDossier=?");
+				    $ins->setFetchMode(PDO::FETCH_ASSOC);
+				    $ins->execute(array($noDossier));
+				    $resultat = $ins->fetch();
+				    $patient = new PatientDTO($resultat["noDossier"], $resultat["noAssuranceMaladie"], $resultat["nom"], $resultat["prenom"], $resultat["adresse"], $resultat["ville"], $resultat["province"], $resultat["codePostal"], $resultat["telephone"], $resultat["courriel"], $resultat["idClinique"]);
+			    }	
+			    catch(Exception $e){}
+
+			    return $patient;
+			
+		    }
         }
 
 

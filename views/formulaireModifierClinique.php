@@ -3,7 +3,7 @@
 <br />
 <br />
 <!--Formulaire pour la modification d'une clinique -->
-<form method="POST" action="CliniqueController.php?action=modifierClinique">
+<form method="POST" action="cliniqueController.php?action=modifierClinique">
     <table>
         <tr>
             <td>

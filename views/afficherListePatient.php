@@ -53,6 +53,12 @@
                     echo "<td>" . $patient->getCodePostal() . "</td>";
                     echo "<td>" . $patient->getTelephone() . "</td>";
                     echo "<td>" . $patient->getCourriel() . "</td>";
+                   echo '<td><input value="Modifier" type="button"
+                    onclick="document.getElementById(\'noDossier\').value = \'' . $patient->getNoDossier() . '\';
+                    this.form.action = \'patientController.php\';
+                    this.form.method = \'GET\';
+                    submit();">
+                    </td>';
                     echo '<td><input value="Supprimer" type="button" 
                     onclick="if (confirm(\'Voulez-vous vraiment supprimer le Patient : ' 
                     . $patient->getNom() . ' ' . $patient->getPrenom() . '\')) { 
@@ -69,6 +75,8 @@
             <input type="hidden" id="nomPatient" name="nomPatient">
             <input type="hidden" id="prenomPatient" name="prenomPatient">
             <input type="hidden" name="nomClinique" value="<?= $nomClinique ?>">
+            <input type="hidden" id="noDossier" name="noDossier"> 
+            <input type="hidden" id="action" name="action" value="formulaireModifierPatient">
         </form>
 </table>
 <?php
