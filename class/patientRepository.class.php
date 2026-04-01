@@ -102,16 +102,16 @@
 			    catch(Exception $e){}
 		    }
 
-            //Méthode permettant de modifier une clinique avec un dto de type clinique...
-		    public function modifierClinique($cliniqueDTO)
+            //Méthode permettant de modifier le Dossier d'un patient avec un dto de type patients...
+		    public function modifierPatient($patientDTO)
 		    {
 			    try
 			    {
 				    $pdo = new PDO($this->stringConnexion,$this->usager,$this->password);
-				    $ins = $pdo->prepare("UPDATE cliniques " . 
-				                            "SET adresse=?,ville=?,province=?,codePostal=?,telephone=?,courriel=? " . 
-									        "WHERE nom=?");
-				    $ins->execute(array($cliniqueDTO->getAdresse(),$cliniqueDTO->getVille(),$cliniqueDTO->getProvince(),$cliniqueDTO->getCodePostal(),$cliniqueDTO->getTelephone(),$cliniqueDTO->getCourriel(), $cliniqueDTO->getNom()));
+				    $ins = $pdo->prepare("UPDATE patients " . 
+				                            "SET noAssuranceMaladie=?,nom=?,prenom=?,adresse=?,ville=?,province=?,codePostal=?,telephone=?,courriel=?,idClinique=? " . 
+									        "WHERE noDossier=?");
+				    $ins->execute(array($patientDTO->getnoAssuranceMaladie(),$patientDTO->getNom(),$patientDTO->getPrenom(),$patientDTO->getAdresse(),$patientDTO->getVille(),$patientDTO->getprovince(), $patientDTO->getCodePostal(), $patientDTO->getTelephone(), $patientDTO->getCourriel(), $patientDTO->getIdClinique(), $patientDTO->getNoDossier()));
 			    }	
 			    catch(Exception $e){
                     echo "Erreur SQL : " . $e->getMessage();
@@ -119,19 +119,19 @@
 		    }
 
             //Méthode permettant d'obtenir une clinique par son nom...
-		    public function obtenirClinique($noDossier)
+		    public function obtenirPatient($noDossier)
 		    {
-			    $clinique = null;
+			    $patient = null;
 			    try
 			    {
 				    $pdo = new PDO($this->stringConnexion,$this->usager,$this->password);
 				    $ins = $pdo->prepare("SELECT * " . 
-				                            "FROM cliniques " . 
-									        "WHERE nom=?");
+				                            "FROM patients " . 
+									        "WHERE noDossier=?");
 				    $ins->setFetchMode(PDO::FETCH_ASSOC);
-				    $ins->execute(array($nomClinique));
+				    $ins->execute(array($noDossier));
 				    $resultat = $ins->fetch();
-				    $clinique = new CliniqueDTO($resultat["nom"], $resultat["adresse"], $resultat["ville"], $resultat["province"], $resultat["codePostal"], $resultat["telephone"], $resultat["courriel"]);
+				    $clinique = new PatientTO($resultat["noDossier"], $resultat["noAssuranceMaladie"], $resultat["nom"], $resultat["prenom"], $resultat["adresse"], $resultat["ville"], $resultat["province"], $resultat["codePostal"], $resultat["telephone"], $resultat["courriel"], $resultat["idClinique"]);
 			    }	
 			    catch(Exception $e){}
 
