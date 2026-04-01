@@ -12,8 +12,9 @@
             private string $codePostal;
             private string $telephone;
             private string $courriel;
+            private int $idClinique;
 
-            public function __construct($noDossier = "", $noAssuranceMaladie = "", $nom = "", $prenom = "", $adresse = "", $ville = "", $province = "", $codePostal = "", $telephone = "", $courriel = "")
+            public function __construct($noDossier = "", $noAssuranceMaladie = "", $nom = "", $prenom = "", $adresse = "", $ville = "", $province = "", $codePostal = "", $telephone = "", $courriel = "", $idClinique = 0)
             {
                 $this->noDossier = $noDossier;
                 $this->noAssuranceMaladie = $noAssuranceMaladie;
@@ -25,6 +26,7 @@
                 $this->codePostal = $codePostal;
                 $this->telephone = $telephone;
                 $this->courriel = $courriel;
+                $this->idClinique = $idClinique;
             }
 
             public function __toString()
@@ -80,6 +82,11 @@
             public function getCourriel(): string
             {
                 return $this->courriel;
+            }
+
+            public function getIdClinique(): int
+            {
+                return $this->idClinique;
             }
         }
 ?>

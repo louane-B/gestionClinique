@@ -47,6 +47,31 @@
             //Importation de la vue...
             require_once(__DIR__ . "/../views/afficherListePatient.php");
             break;
+
+        case "ajouterPatient":
+
+            //Nom de la clinique qui a été sélectionner...
+            $nomClinique = isset($_GET["nomClinique"]) ? $_GET["nomClinique"] : "";
+
+            //Toujour initialiser l'id...
+            $idClinique = null;
+
+            if($nomClinique != ""){
+                //Trouver l'Id de la clinique...
+                $idClinique = CliniqueRepository::getInstance()->obtenirIdClinique($nomClinique);
+            }
+            try
+            {
+                //Appel de l'ajout au Repository..
+                PatientRepository::getInstance()->ajouterPatient(new PatientDTO($_POST["noDossier"], $_POST["noAssuranceMaladie"], $_POST["nom"], $_POST["prenom"], $_POST["adresse"], $_POST["ville"], $_POST["province"], $_POST["codePostal"], $_POST["telephone"], $_POST["courriel"], $idClinique));
+                $_SESSION['success'] = "Patient ajouter avec succès";
+            } catch (Exception $e) {
+                $_SESSION['erreur'] = "Erreur lors de l'ajout du patient";
+            }
+
+            //Redirecion vers la page patientController pour l'affichage...
+            header("Location: patientController.php?action=afficherListePatientsParClinique&nomClinique=" . urlencode($nomClinique));
+            break;
     }
 ?>
 <?php

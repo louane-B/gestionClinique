@@ -94,7 +94,6 @@
 			    }	
 			    catch(Exception $e){
                     echo "Erreur SQL : " . $e->getMessage();
-                    throw $e;
                 }
 		    }
 
