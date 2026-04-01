@@ -101,6 +101,43 @@
 			    }	
 			    catch(Exception $e){}
 		    }
+
+            //Méthode permettant de modifier une clinique avec un dto de type clinique...
+		    public function modifierClinique($cliniqueDTO)
+		    {
+			    try
+			    {
+				    $pdo = new PDO($this->stringConnexion,$this->usager,$this->password);
+				    $ins = $pdo->prepare("UPDATE cliniques " . 
+				                            "SET adresse=?,ville=?,province=?,codePostal=?,telephone=?,courriel=? " . 
+									        "WHERE nom=?");
+				    $ins->execute(array($cliniqueDTO->getAdresse(),$cliniqueDTO->getVille(),$cliniqueDTO->getProvince(),$cliniqueDTO->getCodePostal(),$cliniqueDTO->getTelephone(),$cliniqueDTO->getCourriel(), $cliniqueDTO->getNom()));
+			    }	
+			    catch(Exception $e){
+                    echo "Erreur SQL : " . $e->getMessage();
+                }
+		    }
+
+            //Méthode permettant d'obtenir une clinique par son nom...
+		    public function obtenirClinique($noDossier)
+		    {
+			    $clinique = null;
+			    try
+			    {
+				    $pdo = new PDO($this->stringConnexion,$this->usager,$this->password);
+				    $ins = $pdo->prepare("SELECT * " . 
+				                            "FROM cliniques " . 
+									        "WHERE nom=?");
+				    $ins->setFetchMode(PDO::FETCH_ASSOC);
+				    $ins->execute(array($nomClinique));
+				    $resultat = $ins->fetch();
+				    $clinique = new CliniqueDTO($resultat["nom"], $resultat["adresse"], $resultat["ville"], $resultat["province"], $resultat["codePostal"], $resultat["telephone"], $resultat["courriel"]);
+			    }	
+			    catch(Exception $e){}
+
+			    return $clinique;
+			
+		    }
         }
 
 
