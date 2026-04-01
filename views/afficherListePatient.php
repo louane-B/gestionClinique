@@ -53,9 +53,22 @@
                     echo "<td>" . $patient->getCodePostal() . "</td>";
                     echo "<td>" . $patient->getTelephone() . "</td>";
                     echo "<td>" . $patient->getCourriel() . "</td>";
+                    echo '<td><input value="Supprimer" type="button" 
+                    onclick="if (confirm(\'Voulez-vous vraiment supprimer le Patient : ' 
+                    . $patient->getNom() . ' ' . $patient->getPrenom() . '\')) { 
+                        document.getElementById(\'nomPatient\'). value =\'' . $patient->getNom() . '\';
+                        document.getElementById(\'prenomPatient\'). value =\'' . $patient->getPrenom() . '\';
+                        this.form.action =\'patientController.php?action=supprimerPatient\'; 
+                        this.form.method =\'POST\';
+                        this.form.submit();
+                    }">
+                    </td>';
                     echo "</tr>";
                 }
             ?>
+            <input type="hidden" id="nomPatient" name="nomPatient">
+            <input type="hidden" id="prenomPatient" name="prenomPatient">
+            <input type="hidden" name="nomClinique" value="<?= $nomClinique ?>">
         </form>
 </table>
 <?php

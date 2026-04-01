@@ -69,9 +69,20 @@
                 $_SESSION['erreur'] = "Erreur lors de l'ajout du patient";
             }
 
-            //Redirecion vers la page patientController pour l'affichage...
+            //Redirecion vers la page patientController pour l'affichage de la liste des patients de la clinique sélectionner...
             header("Location: patientController.php?action=afficherListePatientsParClinique&nomClinique=" . urlencode($nomClinique));
             break;
+
+            //On supprime le patient
+            case "supprimerPatient":
+
+                //Nom de la clinique qui a été sélectionner...
+                $nomClinique = isset($_POST["nomClinique"]) ? $_POST["nomClinique"] : "";
+                //Appel de la suppression au repository...
+                PatientRepository::getInstance()->supprimerPatient($_POST["nomPatient"], $_POST["prenomPatient"]);
+                //Redirection vers la page patientController pour l'affichage de la liste des patients de la clinique sélectionner...
+                header("Location: patientController.php?action=afficherListePatientsParClinique&nomClinique=" . urlencode($nomClinique));
+                break;
     }
 ?>
 <?php
